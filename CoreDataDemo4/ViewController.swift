@@ -85,7 +85,15 @@ class ViewController: SViewController {
             self.fetchRequestWithTemplate(named: "FetchRequestAll")
         }
         
-        Alert.show(.actionSheet, title: "Filter & Sort", message: nil, actions: [filterHungry, filterCutenessAction1, filterCutenessAction2, filterCutenessAction3, filterYoung, filterOld, sortAZAction, sortZAAction, showAllAction, Alert.cancelAction()], completion: nil)
+        let orderedCutestAction = UIAlertAction(title: "Ordered 😻😻😻 (A-Z)", style: .default) { (action) in
+            self.fetchOrderedCutestCats()
+        }
+        
+        let orderedCutestAgeAction = UIAlertAction(title: "Ordered 😻😻😻 Age", style: .default) { (action) in
+            self.fetchOrderedCutestAgeCats()
+        }
+        
+        Alert.show(.actionSheet, title: "Filter & Sort", message: nil, actions: [filterHungry, filterCutenessAction1, filterCutenessAction2, filterCutenessAction3, filterYoung, filterOld, sortAZAction, sortZAAction, orderedCutestAction, orderedCutestAgeAction, showAllAction, Alert.cancelAction()], completion: nil)
     }
     
     // MARK: - Views
@@ -229,26 +237,55 @@ extension ViewController {
     }
     
     func fetchCats() {
-        coreDataStack.fetch(Cat.self) { (result) in
-            switch result {
-            case .success(let cats):
-                self.cats = cats
-                self.collectionView.reloadDataOnMainThread()
-            case .failure(let err):
-                Alert.showError(message: err.localizedDescription)
-            }
+        coreDataStack.fetch(entityName: "Cat", ofType: Cat.self) { (result) in
+            self.handle(result)
         }
     }
     
     func fetchRequestWithTemplate(named: String) {
-        coreDataStack.fetch(named, ofType: Cat.self) { (result) in
-            switch result {
-            case .success(let cats):
-                self.cats = cats
-                self.collectionView.reloadDataOnMainThread()
-            case .failure(let err):
-                Alert.showError(message: err.localizedDescription)
-            }
+        coreDataStack.fetch(requestName: named, ofType: Cat.self) { (result) in
+            self.handle(result)
+        }
+    }
+    
+    func fetchOrderedCutestCats() {
+        
+        let compareSelector = #selector(NSString.localizedStandardCompare(_:))
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Cat.name), ascending: true, selector: compareSelector)
+        let predicate = NSPredicate(format: "%K == %@", #keyPath(Cat.cutenessLevel), "😻😻😻")
+        
+        let fetchRequest: NSFetchRequest<Cat> = Cat.fetchRequest()
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = predicate
+        
+        coreDataStack.fetch(fetchRequest, ofType: Cat.self) { (result) in
+            self.handle(result)
+        }
+    }
+    
+    func fetchOrderedCutestAgeCats() {
+        
+        let compareSelector = #selector(NSString.localizedStandardCompare(_:))
+        let sortDescriptor0 = NSSortDescriptor(key: #keyPath(Cat.name), ascending: true, selector: compareSelector)
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(Cat.age), ascending: false)
+        let predicate = NSPredicate(format: "%K == %@", #keyPath(Cat.cutenessLevel), "😻😻😻")
+        
+        let fetchRequest: NSFetchRequest<Cat> = Cat.fetchRequest()
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor0]
+        fetchRequest.predicate = predicate
+        
+        coreDataStack.fetch(fetchRequest, ofType: Cat.self) { (result) in
+            self.handle(result)
+        }
+    }
+    
+    func handle(_ result: Result<[Cat], Error>) {
+        switch result {
+        case .success(let cats):
+            self.cats = cats
+            self.collectionView.reloadDataOnMainThread()
+        case .failure(let err):
+            Alert.showError(message: err.localizedDescription)
         }
     }
     
