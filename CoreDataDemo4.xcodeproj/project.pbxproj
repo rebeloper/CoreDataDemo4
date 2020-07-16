@@ -3,16 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C9ED8ABC24C05C6400ABDFBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED8ABB24C05C6400ABDFBE /* AppDelegate.swift */; };
 		C9ED8ABE24C05C6400ABDFBE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED8ABD24C05C6400ABDFBE /* SceneDelegate.swift */; };
 		C9ED8AC024C05C6400ABDFBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED8ABF24C05C6400ABDFBE /* ViewController.swift */; };
-		C9ED8AC324C05C6400ABDFBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9ED8AC124C05C6400ABDFBE /* Main.storyboard */; };
 		C9ED8AC524C05C6500ABDFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9ED8AC424C05C6500ABDFBE /* Assets.xcassets */; };
 		C9ED8AC824C05C6500ABDFBE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9ED8AC624C05C6500ABDFBE /* LaunchScreen.storyboard */; };
+		C9ED8AD124C0606800ABDFBE /* SparkUI in Frameworks */ = {isa = PBXBuildFile; productRef = C9ED8AD024C0606800ABDFBE /* SparkUI */; };
+		C9ED8AD324C060AF00ABDFBE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED8AD224C060AF00ABDFBE /* CoreDataStack.swift */; };
+		C9ED8AD624C0617500ABDFBE /* CoreDataDemo4.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9ED8AD424C0617500ABDFBE /* CoreDataDemo4.xcdatamodeld */; };
+		C9ED8AD824C061B400ABDFBE /* CatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED8AD724C061B400ABDFBE /* CatCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +23,12 @@
 		C9ED8ABB24C05C6400ABDFBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9ED8ABD24C05C6400ABDFBE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C9ED8ABF24C05C6400ABDFBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C9ED8AC224C05C6400ABDFBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9ED8AC424C05C6500ABDFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9ED8AC724C05C6500ABDFBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9ED8AC924C05C6500ABDFBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9ED8AD224C060AF00ABDFBE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		C9ED8AD524C0617500ABDFBE /* CoreDataDemo4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataDemo4.xcdatamodel; sourceTree = "<group>"; };
+		C9ED8AD724C061B400ABDFBE /* CatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9ED8AD124C0606800ABDFBE /* SparkUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,10 +65,12 @@
 				C9ED8ABB24C05C6400ABDFBE /* AppDelegate.swift */,
 				C9ED8ABD24C05C6400ABDFBE /* SceneDelegate.swift */,
 				C9ED8ABF24C05C6400ABDFBE /* ViewController.swift */,
-				C9ED8AC124C05C6400ABDFBE /* Main.storyboard */,
+				C9ED8AD724C061B400ABDFBE /* CatCell.swift */,
+				C9ED8AD224C060AF00ABDFBE /* CoreDataStack.swift */,
 				C9ED8AC424C05C6500ABDFBE /* Assets.xcassets */,
 				C9ED8AC624C05C6500ABDFBE /* LaunchScreen.storyboard */,
 				C9ED8AC924C05C6500ABDFBE /* Info.plist */,
+				C9ED8AD424C0617500ABDFBE /* CoreDataDemo4.xcdatamodeld */,
 			);
 			path = CoreDataDemo4;
 			sourceTree = "<group>";
@@ -83,6 +91,9 @@
 			dependencies = (
 			);
 			name = CoreDataDemo4;
+			packageProductDependencies = (
+				C9ED8AD024C0606800ABDFBE /* SparkUI */,
+			);
 			productName = CoreDataDemo4;
 			productReference = C9ED8AB824C05C6400ABDFBE /* CoreDataDemo4.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +122,9 @@
 				Base,
 			);
 			mainGroup = C9ED8AAF24C05C6400ABDFBE;
+			packageReferences = (
+				C9ED8ACF24C0606800ABDFBE /* XCRemoteSwiftPackageReference "SparkUI" */,
+			);
 			productRefGroup = C9ED8AB924C05C6400ABDFBE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +141,6 @@
 			files = (
 				C9ED8AC824C05C6500ABDFBE /* LaunchScreen.storyboard in Resources */,
 				C9ED8AC524C05C6500ABDFBE /* Assets.xcassets in Resources */,
-				C9ED8AC324C05C6400ABDFBE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +151,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9ED8AD824C061B400ABDFBE /* CatCell.swift in Sources */,
 				C9ED8AC024C05C6400ABDFBE /* ViewController.swift in Sources */,
 				C9ED8ABC24C05C6400ABDFBE /* AppDelegate.swift in Sources */,
 				C9ED8ABE24C05C6400ABDFBE /* SceneDelegate.swift in Sources */,
+				C9ED8AD624C0617500ABDFBE /* CoreDataDemo4.xcdatamodeld in Sources */,
+				C9ED8AD324C060AF00ABDFBE /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C9ED8AC124C05C6400ABDFBE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C9ED8AC224C05C6400ABDFBE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C9ED8AC624C05C6500ABDFBE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -338,6 +346,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C9ED8ACF24C0606800ABDFBE /* XCRemoteSwiftPackageReference "SparkUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rebeloper/SparkUI.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.11.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C9ED8AD024C0606800ABDFBE /* SparkUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9ED8ACF24C0606800ABDFBE /* XCRemoteSwiftPackageReference "SparkUI" */;
+			productName = SparkUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C9ED8AD424C0617500ABDFBE /* CoreDataDemo4.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C9ED8AD524C0617500ABDFBE /* CoreDataDemo4.xcdatamodel */,
+			);
+			currentVersion = C9ED8AD524C0617500ABDFBE /* CoreDataDemo4.xcdatamodel */;
+			path = CoreDataDemo4.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C9ED8AB024C05C6400ABDFBE /* Project object */;
 }
