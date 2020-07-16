@@ -229,28 +229,26 @@ extension ViewController {
     }
     
     func fetchCats() {
-        let catFetch: NSFetchRequest<Cat> = Cat.fetchRequest()
-        
-        do {
-            let cats = try coreDataStack.managedContext.fetch(catFetch)
-            self.cats = cats
-            self.collectionView.reloadDataOnMainThread()
-        } catch {
-            Alert.showError(message: error.localizedDescription)
+        coreDataStack.fetch(Cat.self) { (result) in
+            switch result {
+            case .success(let cats):
+                self.cats = cats
+                self.collectionView.reloadDataOnMainThread()
+            case .failure(let err):
+                Alert.showError(message: err.localizedDescription)
+            }
         }
     }
     
     func fetchRequestWithTemplate(named: String) {
-        guard
-            let model = self.coreDataStack.managedContext .persistentStoreCoordinator?.managedObjectModel,
-            let fetchRequest = model.fetchRequestTemplate(forName: named) as? NSFetchRequest<Cat>
-            else { return }
-        
-        do {
-            cats = try coreDataStack.managedContext.fetch(fetchRequest)
-            collectionView.reloadDataOnMainThread()
-        } catch {
-            Alert.showError(message: error.localizedDescription)
+        coreDataStack.fetch(named, ofType: Cat.self) { (result) in
+            switch result {
+            case .success(let cats):
+                self.cats = cats
+                self.collectionView.reloadDataOnMainThread()
+            case .failure(let err):
+                Alert.showError(message: err.localizedDescription)
+            }
         }
     }
     
