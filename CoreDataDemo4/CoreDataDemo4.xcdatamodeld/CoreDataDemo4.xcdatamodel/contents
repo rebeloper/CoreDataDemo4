@@ -7,6 +7,13 @@
         <attribute name="isHungry" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
+    <fetchRequest name="FetchRequestAll" entity="Cat"/>
+    <fetchRequest name="FetchRequestCute1" entity="Cat" predicateString="cutenessLevel == &quot;😻&quot;"/>
+    <fetchRequest name="FetchRequestCute2" entity="Cat" predicateString="cutenessLevel == &quot;😻😻&quot;"/>
+    <fetchRequest name="FetchRequestCute3" entity="Cat" predicateString="cutenessLevel == &quot;😻😻😻&quot;"/>
+    <fetchRequest name="FetchRequestHungry" entity="Cat" predicateString="isHungry == 1"/>
+    <fetchRequest name="FetchRequestOld" entity="Cat" predicateString="age &gt;= 3"/>
+    <fetchRequest name="FetchRequestYoung" entity="Cat" predicateString="age &lt; 3"/>
     <elements>
         <element name="Cat" positionX="-45" positionY="0" width="128" height="118"/>
     </elements>

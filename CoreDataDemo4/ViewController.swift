@@ -39,38 +39,53 @@ class ViewController: SViewController {
     lazy var filterAndSortBarButtonItem = UIBarButtonItem(title: "Filter & Sort", style: .done) {
         
         let filterHungry = UIAlertAction(title: "Filter hungry", style: .default) { (action) in
-            
-        }
-        
-        let filterYoung = UIAlertAction(title: "Filter young", style: .default) { (action) in
-            
-        }
-        
-        let filterOld = UIAlertAction(title: "Filter young", style: .default) { (action) in
-            
+            self.fetchRequestWithTemplate(named: "FetchRequestHungry")
         }
         
         let filterCutenessAction1 = UIAlertAction(title: "Filter 😻", style: .default) { (action) in
-            
+            self.fetchRequestWithTemplate(named: "FetchRequestCute1")
         }
         
         let filterCutenessAction2 = UIAlertAction(title: "Filter 😻😻", style: .default) { (action) in
-            
+            self.fetchRequestWithTemplate(named: "FetchRequestCute2")
         }
         
         let filterCutenessAction3 = UIAlertAction(title: "Filter 😻😻😻", style: .default) { (action) in
-            
+            self.fetchRequestWithTemplate(named: "FetchRequestCute3")
+        }
+        
+        let filterYoung = UIAlertAction(title: "Filter young", style: .default) { (action) in
+            self.fetchRequestWithTemplate(named: "FetchRequestYoung")
+        }
+        
+        let filterOld = UIAlertAction(title: "Filter old", style: .default) { (action) in
+            self.fetchRequestWithTemplate(named: "FetchRequestOld")
         }
         
         let sortAZAction = UIAlertAction(title: "Sort by name (A-Z)", style: .default) { (action) in
+            self.fetchRequestWithTemplate(named: "FetchRequestAll")
             
+            self.cats = self.cats.sorted { (c0, c1) -> Bool in
+                c0.name! < c1.name!
+            }
+            self.collectionView.reloadData()
         }
         
         let sortZAAction = UIAlertAction(title: "Sort by name (Z-A)", style: .default) { (action) in
+            self.fetchRequestWithTemplate(named: "FetchRequestAll")
             
+            self.cats = self.cats.sorted { (c0, c1) -> Bool in
+                c0.name! > c1.name!
+            }
+            self.collectionView.reloadData()
         }
         
-        Alert.show(.actionSheet, title: "Filter & Sort", message: nil, actions: [filterHungry, filterYoung, filterOld, filterCutenessAction1, filterCutenessAction2, filterCutenessAction3, sortAZAction, sortZAAction, Alert.cancelAction()], completion: nil)
+        let showAllAction = UIAlertAction(title: "Show all", style: .default) { (action) in
+//            self.fetchCats()
+            self.fetchRequestWithTemplate(named: "FetchRequestAll")
+        }
+        
+        Alert.show(.actionSheet, title: "Filter & Sort", message: nil, actions: [filterHungry, filterCutenessAction1, filterCutenessAction2, filterCutenessAction3, filterYoung, filterOld, sortAZAction, sortZAAction, showAllAction, Alert.cancelAction()], completion: nil)
     }
     
     // MARK: - Views
@@ -224,4 +239,19 @@ extension ViewController {
             Alert.showError(message: error.localizedDescription)
         }
     }
+    
+    func fetchRequestWithTemplate(named: String) {
+        guard
+            let model = self.coreDataStack.managedContext .persistentStoreCoordinator?.managedObjectModel,
+            let fetchRequest = model.fetchRequestTemplate(forName: named) as? NSFetchRequest<Cat>
+            else { return }
+        
+        do {
+            cats = try coreDataStack.managedContext.fetch(fetchRequest)
+            collectionView.reloadDataOnMainThread()
+        } catch {
+            Alert.showError(message: error.localizedDescription)
+        }
+    }
+    
 }
